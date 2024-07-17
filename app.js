@@ -9,17 +9,17 @@ const {
 
 (async () => {
 
-    // CLEAR MISC CONSOLE LOGS OF PUNYCODE AND OTHER STUFF
+    // Clear Misc Console Logs Of Punycode And Other Stuff
     await new Promise(r => setTimeout(r, 10)).then(() => console.clear());
 
     const runMode = await selectRunMode();
     const headless = await selectHeadlessMode();
     const geolocation = await selectGeolocation();
 
-    const browser = await initializeBrowser(headless, geolocation);
+    const browser = await initializeBrowser(headless, geolocation, runMode);
     const page = await browser.newPage();
     await configurePage(page);
-    const url = 'https://music.youtube.com';
+    const url = 'https://tinder.com';
     await page.goto(url);
 
     closeInterface();
@@ -27,7 +27,7 @@ const {
 
     try {
 
-        if (runMode === 'debug') {
+        if (runMode === 'debug' || runMode === 'cookie') {
 
             await page.evaluate(() => {
                 document.addEventListener('mousemove', (event) => {
@@ -36,8 +36,6 @@ const {
             });
 
             await page.pause();
-
-        } else if (runMode === 'messenger') {
 
         } else if (runMode === 'swipe') {
             /**

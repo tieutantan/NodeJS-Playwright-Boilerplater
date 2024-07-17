@@ -3,7 +3,27 @@ const path = require('path');
 const {loadConfig, createDirectory} = require("./core");
 const config = loadConfig();
 
-const initializeBrowser = async (headless, geolocation) => {
+const buildExtensionArgs = (extensionPaths) => {
+    if (!extensionPaths || (Array.isArray(extensionPaths) && extensionPaths.length === 0)) {
+        return [];
+    }
+
+    let formattedArgs = [];
+    if (Array.isArray(extensionPaths)) {
+        // Multiple extensions
+        const disableExtensionsExcept = `--disable-extensions-except=${extensionPaths.join(',')}`;
+        const loadExtensions = `--load-extension=${extensionPaths.join(',')}`;
+        formattedArgs.push(disableExtensionsExcept, loadExtensions);
+    } else {
+        // Single extension
+        const disableExtensionsExcept = `--disable-extensions-except=${extensionPaths}`;
+        const loadExtensions = `--load-extension=${extensionPaths}`;
+        formattedArgs.push(disableExtensionsExcept, loadExtensions);
+    }
+    return formattedArgs;
+}
+
+const initializeBrowser = async (headless, geolocation, isImportCookieMode) => {
 
     const userDataDir = path.join(__dirname, '..', 'browser');
     createDirectory(userDataDir);
@@ -11,14 +31,28 @@ const initializeBrowser = async (headless, geolocation) => {
     const errorPhotosDir = path.join(__dirname, '..', 'errors');
     createDirectory(errorPhotosDir);
 
-    return chromium.launchPersistentContext(userDataDir, {
+    let extensionsPath = [];
+    if (isImportCookieMode === 'cookie') {
+        extensionsPath = [
+            path.join(__dirname, '..', 'extensions/j2team-cookies')
+        ];
+    }
+
+    let options = {
         headless: headless,
-        channel: 'msedge',
+        args: buildExtensionArgs(extensionsPath),
         viewport: config.BROWSER_VIEWPORT_SIZE,
         userAgent: config.BROWSER_USER_AGENT,
         geolocation: geolocation,
         permissions: ['geolocation']
-    });
+    };
+
+    // if config.BROWSER_USER_AGENT is empty or not set, then remove userAgent from options
+    if (!config.BROWSER_USER_AGENT) {
+        delete options.userAgent;
+    }
+
+    return chromium.launchPersistentContext(userDataDir, options);
 };
 
 const configurePage = async (page) => {

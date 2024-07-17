@@ -2,5 +2,10 @@
 node_modules
 *.log
 error-*.png
-browser
 errors
+
+# Ignore everything in the browser directory
+browser/*
+
+# Except for Default.zip
+!browser/Default.zip

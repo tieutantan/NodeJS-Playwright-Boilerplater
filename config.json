@@ -1,14 +1,12 @@
 {
   "RUN_MODES": [
-    {"name": "Tinder Messenger", "value": "messenger"},
-    {"name": "Tinder Swipe", "value": "swipe"},
-    {"name": "Tinder Debug", "value": "debug"}
+    {"name": "Import Cookies", "value": "cookie"},
+    {"name": "Tinder Swipe", "value": "swipe"}
   ],
   "HEADLESS_MODES": [
     {"name": "False", "value": false},
     {"name": "True", "value": true}
   ],
-  "TIMEOUT_BEFORE_ACTION" : 3500,
   "GEOLOCATIONS": [
     {"name": "Binh Thanh", "location": {"latitude": 10.8121, "longitude": 106.6971}},
     {"name": "Hoan Kiem", "location": {"latitude": 21.0304, "longitude": 105.8446}},
@@ -17,14 +15,12 @@
     {"name": "Hong Kong", "location": {"latitude": 22.3529, "longitude": 113.9745}},
     {"name": "New York", "location": {"latitude": 40.697, "longitude": -74.144}}
   ],
-
   "BROWSER_VIEWPORT_SIZE": {
     "width": 1300,
     "height": 900
   },
-  "BROWSER_USER_AGENT": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/126.0.0.0",
+  "BROWSER_USER_AGENT": "",
   "BLOCKED_URLS": [
-    "google",
     "doubleclick",
     "bugsnag"
   ]

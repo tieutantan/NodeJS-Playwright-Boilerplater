@@ -1,6 +1,19 @@
 # NodeJS-Playwright-Boilerplater
 For Automation Tasks, Not Testing Only...
 
+### Features
+- Support install extensions on browser.
+- Custom multiple geolocation.
+- Block resource load from domains.
+
+### Installation
+```bash
+npm i
+```
+
+### Coming Soon...
+- xxxxxx
+
 ### Locations
 
     Hoan Kiem
