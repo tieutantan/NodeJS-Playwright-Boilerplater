@@ -19,7 +19,7 @@ const {
     const browser = await initializeBrowser(headless, geolocation, runMode);
     const page = await browser.newPage();
     await configurePage(page);
-    const url = 'https://tinder.com';
+    const url = 'https://bot.sannysoft.com';
     await page.goto(url);
 
     closeInterface();

@@ -1,9 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Get the full path of a file or directory from root
+ * @example getPath('config.json')
+ * @param pathFromRoot
+ * @returns {string}
+ */
+const getPath = (pathFromRoot) => {
+    return path.join(process.cwd(), pathFromRoot);
+};
+
 const loadConfig = () => {
-    const configPath = path.join(__dirname, '..', 'config.json');
-    return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    return JSON.parse(fs.readFileSync(getPath('config.json'), 'utf-8'));
 }
 
 const createDirectory = (dirPath) => {
@@ -24,5 +33,6 @@ const getCurrentTime = () => {
 module.exports = {
     loadConfig,
     getCurrentTime,
-    createDirectory
+    createDirectory,
+    getPath
 };

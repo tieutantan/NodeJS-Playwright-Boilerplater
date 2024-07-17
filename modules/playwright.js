@@ -1,6 +1,6 @@
-const {chromium} = require('playwright');
-const path = require('path');
-const {loadConfig, createDirectory} = require("./core");
+const { chromium } = require('playwright-extra');
+const stealth = require('puppeteer-extra-plugin-stealth')();
+const {loadConfig, createDirectory, getPath} = require("./core");
 const config = loadConfig();
 
 const buildExtensionArgs = (extensionPaths) => {
@@ -25,16 +25,16 @@ const buildExtensionArgs = (extensionPaths) => {
 
 const initializeBrowser = async (headless, geolocation, isImportCookieMode) => {
 
-    const userDataDir = path.join(__dirname, '..', 'browser');
+    const userDataDir = getPath('browser');
     createDirectory(userDataDir);
 
-    const errorPhotosDir = path.join(__dirname, '..', 'errors');
+    const errorPhotosDir = getPath('errors');
     createDirectory(errorPhotosDir);
 
     let extensionsPath = [];
     if (isImportCookieMode === 'cookie') {
         extensionsPath = [
-            path.join(__dirname, '..', 'extensions/j2team-cookies')
+            getPath('extensions/j2team-cookies')
         ];
     }
 
@@ -51,6 +51,9 @@ const initializeBrowser = async (headless, geolocation, isImportCookieMode) => {
     if (!config.BROWSER_USER_AGENT) {
         delete options.userAgent;
     }
+
+    // Applies various techniques to make detection of headless puppeteer harder
+    chromium.use(stealth);
 
     return chromium.launchPersistentContext(userDataDir, options);
 };

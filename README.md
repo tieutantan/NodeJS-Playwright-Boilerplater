@@ -1,10 +1,12 @@
 # NodeJS-Playwright-Boilerplater
-For Automation Tasks, Not Testing Only...
+Playwright Enhanced For Automation Tasks!
 
 ### Features
-- Support install extensions on browser.
+- Support install extensions on the browser.
 - Custom multiple geolocation.
 - Block resource load from domains.
+- Multiple run modes.
+- playwright-extra.
 
 ### Installation
 ```bash
@@ -13,6 +15,9 @@ npm i
 
 ### Coming Soon...
 - xxxxxx
+```javascript
+// xxxxxx
+```
 
 ### Locations
 
