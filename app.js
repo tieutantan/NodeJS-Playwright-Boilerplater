@@ -23,7 +23,6 @@ const {
     await page.goto(url);
 
     closeInterface();
-    console.clear();
 
     try {
 
