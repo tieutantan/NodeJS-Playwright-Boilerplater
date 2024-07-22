@@ -3,22 +3,16 @@ const stealth = require('puppeteer-extra-plugin-stealth')();
 const {loadConfig, createDirectory, getPath} = require("./core");
 const config = loadConfig();
 
+/**
+ * Build extension arguments
+ * @param extensionPaths
+ * @returns {string[]}
+ */
 const buildExtensionArgs = (extensionPaths) => {
-    if (!extensionPaths || (Array.isArray(extensionPaths) && extensionPaths.length === 0)) {
-        return [];
-    }
-
-    let formattedArgs = [];
-    if (Array.isArray(extensionPaths)) {
-        // Multiple extensions
-        const disableExtensionsExcept = `--disable-extensions-except=${extensionPaths.join(',')}`;
-        const loadExtensions = `--load-extension=${extensionPaths.join(',')}`;
-        formattedArgs.push(disableExtensionsExcept, loadExtensions);
-    } else {
-        // Single extension
-        const disableExtensionsExcept = `--disable-extensions-except=${extensionPaths}`;
-        const loadExtensions = `--load-extension=${extensionPaths}`;
-        formattedArgs.push(disableExtensionsExcept, loadExtensions);
+    const formattedArgs = ['--disable-notifications'];
+    if (extensionPaths) {
+        const paths = Array.isArray(extensionPaths) ? extensionPaths.join(',') : extensionPaths;
+        formattedArgs.push(`--disable-extensions-except=${paths}`, `--load-extension=${paths}`);
     }
     return formattedArgs;
 }
@@ -33,9 +27,7 @@ const initializeBrowser = async (headless, geolocation, isImportCookieMode) => {
 
     let extensionsPath = [];
     if (isImportCookieMode === 'cookie') {
-        extensionsPath = [
-            getPath('extensions/j2team-cookies')
-        ];
+        extensionsPath.push(getPath('extensions/j2team-cookies'));
     }
 
     let options = {
