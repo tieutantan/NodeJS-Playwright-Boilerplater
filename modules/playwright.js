@@ -52,6 +52,11 @@ const initializeBrowser = async (headless, geolocation, isImportCookieMode) => {
         delete options.userAgent;
     }
 
+    // if geolocation.latitude is 1111, use default geolocation
+    if (geolocation.latitude === 1111) {
+        delete options.geolocation;
+    }
+
     // Applies various techniques to make detection of headless puppeteer harder
     chromium.use(stealth);
 

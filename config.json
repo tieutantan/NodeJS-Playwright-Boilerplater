@@ -8,6 +8,7 @@
     {"name": "True", "value": true}
   ],
   "GEOLOCATIONS": [
+    {"name": "Current Location", "location": {"latitude": 1111, "longitude": 1111}},
     {"name": "Binh Thanh", "location": {"latitude": 10.8121, "longitude": 106.6971}},
     {"name": "Hoan Kiem", "location": {"latitude": 21.0304, "longitude": 105.8446}},
     {"name": "Le Chan", "location": {"latitude": 20.8357, "longitude": 106.66699}},
@@ -16,8 +17,8 @@
     {"name": "New York", "location": {"latitude": 40.697, "longitude": -74.144}}
   ],
   "BROWSER_VIEWPORT_SIZE": {
-    "width": 1300,
-    "height": 900
+    "width": 1280,
+    "height": 800
   },
   "BROWSER_USER_AGENT": "",
   "BLOCKED_URLS": [

@@ -40,3 +40,7 @@ npm i
         });
     });
     await page.pause();
+
+### Paths
+    Google Chrome: C:\Users\%USERNAME%\AppData\Local\Google\Chrome\User Data\Default
+    Chromium: C:\Users\%USERNAME%\AppData\Local\Chromium\User Data\Default
