@@ -19,7 +19,7 @@ const {
     const browser = await initializeBrowser(headless, geolocation, runMode);
     const page = await browser.newPage();
     await configurePage(page);
-    const url = 'https://bot.sannysoft.com';
+    const url = 'https://bot.sannysoft.com'; // https://www.browserscan.net/bot-detection, https://deviceandbrowserinfo.com/are_you_a_bot
     await page.goto(url);
 
     closeInterface();
